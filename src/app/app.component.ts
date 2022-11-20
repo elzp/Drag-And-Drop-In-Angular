@@ -1,19 +1,12 @@
 import { Component } from '@angular/core';
-
-interface ArticleInt {
-  name: string;
-  date: string;
-  content: string;
-  container: string;
-  position: number;
-}
+import { ArticleInt } from './interfaces';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent  {
+export class AppComponent {
   name = 'Angular';
 
   articlesData: Array<ArticleInt> = [

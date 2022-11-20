@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-
-
 @Component({
   selector: 'article-container',
   templateUrl: './article-container.component.html',
