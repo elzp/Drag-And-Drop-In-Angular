@@ -11,8 +11,12 @@
     "
   >
     <h2 class="text-4xl p-5 text-center">Drafts</h2>
-    <main class="p-10 bg-gray-300 flex-1">
-      <onearticle></onearticle>
+    <main class="p-10 bg-gray-300 flex-1"
+    *ngFor="let article of articlesData">
+      <onearticle [title]="article.name"
+      [content]="article.content"
+      [date]="article.date"
+      ></onearticle>
 
       <!-- <article class="bg-white rounded-md overflow-hidden my-10">
         <a href="#">
