@@ -7,7 +7,7 @@ import { ArticleInt } from './interfaces';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  name = 'Angular';
+  name = ['Drafts', 'Published'];
 
   articlesData: Array<ArticleInt> = [
     {
