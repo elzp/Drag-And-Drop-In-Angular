@@ -10,8 +10,9 @@
   "
 >
   <h2 class="text-4xl p-5 text-center">{{ name }}</h2>
-  <main class="p-10 bg-gray-300 flex-1" *ngFor="let article of articlesData">
+  <main class="p-10 bg-gray-300 flex-1">
     <onearticle
+      *ngFor="let article of articlesData"
       [title]="article.name"
       [content]="article.content"
       [date]="article.date"
