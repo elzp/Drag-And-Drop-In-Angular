@@ -12,7 +12,7 @@
   draggable="false"
 >
   <h2 class="text-4xl p-5 text-center">{{ name }}</h2>
-  <main class="p-10 bg-gray-300 flex-1">
+  <main class="p-10 bg-gray-300 flex-1" (dragstart)="onDragStart($event)">
     <onearticle
       *ngFor="let article of thisArticles"
       [title]="article.name"

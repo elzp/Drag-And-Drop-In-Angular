@@ -8,9 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ArticleContainer implements OnInit {
   @Input() name: string;
   @Input() articlesData;
-  thisArticles; 
+  thisArticles;
 
-  ngOnInit(){
-    this.thisArticles = this.articlesData.filter(it=>it.container===this.name)
+  ngOnInit() {
+    this.thisArticles = this.articlesData.filter(
+      (it) => it.container === this.name
+    );
+  }
+  onDragStart(event) {
+    event.dataTransfer.setData('text', event.target.id);
   }
 }
