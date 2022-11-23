@@ -39,4 +39,7 @@ export class AppComponent {
       position: -1,
     },
   ];
+  changeContainer(data) {
+    console.log(data);
+  }
 }

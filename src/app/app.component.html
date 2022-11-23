@@ -19,11 +19,13 @@
         [name]="name[0]"
         [articlesData]="articlesData"
         draggable="false"
+        (changecontainerEvent)="changeContainer($event)"
       ></article-container>
       <article-container
         draggable="false"
         [name]="name[1]"
         [articlesData]="articlesData"
+        (changecontainerEvent)="changeContainer($event)"
       ></article-container>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
