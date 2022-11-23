@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { ArticleInt } from './interfaces';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-})
+}) //implements OnChanges
 export class AppComponent {
   name = ['Drafts', 'Published'];
 
@@ -40,6 +40,15 @@ export class AppComponent {
     },
   ];
   changeContainer(data) {
-    console.log(data);
+    const articlesAfterChange = this.articlesData.map((it) => {
+      it;
+      if (it.name === data.title) {
+        it.container =
+          it['container'] === data.container ? it.container : data.container;
+      }
+
+      return it;
+    });
+    this.articlesData = [...articlesAfterChange];
   }
 }
