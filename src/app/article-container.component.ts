@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 interface eventData {
   title: string;
@@ -10,16 +18,14 @@ interface eventData {
   templateUrl: './article-container.component.html',
   styles: [`h1 { font-family: Lato; }`],
 })
-export class ArticleContainer implements OnInit {
+export class ArticleContainer implements OnInit, OnChanges {
   @Input() name: string;
   @Input() articlesData;
   thisArticles;
   @Output() changecontainerEvent = new EventEmitter<eventData>();
 
   ngOnInit() {
-    this.thisArticles = this.articlesData.filter(
-      (it) => it.container === this.name
-    );
+    this.setCurrentUIData();
   }
   onDragStart(event) {
     event.dataTransfer.setData('text', event.target.id);
@@ -33,5 +39,16 @@ export class ArticleContainer implements OnInit {
       title: data,
       container: this.name,
     });
+  }
+
+  setCurrentUIData() {
+    this.thisArticles = this.articlesData.filter(
+      (it) => it.container === this.name
+    );
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.articlesData !== changes.articlesData.currentValue) {
+      this.setCurrentUIData();
+    }
   }
 }
