@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+
+interface eventData {
+  title: string;
+  container: string;
+}
 
 @Component({
   selector: 'article-container',
@@ -9,6 +14,7 @@ export class ArticleContainer implements OnInit {
   @Input() name: string;
   @Input() articlesData;
   thisArticles;
+  @Output() changecontainerEvent = new EventEmitter<eventData>();
 
   ngOnInit() {
     this.thisArticles = this.articlesData.filter(
@@ -17,5 +23,15 @@ export class ArticleContainer implements OnInit {
   }
   onDragStart(event) {
     event.dataTransfer.setData('text', event.target.id);
+  }
+  onDragover(event) {
+    event.preventDefault();
+  }
+  onDrop(event) {
+    var data = event.dataTransfer.getData('text');
+    this.changecontainerEvent.emit({
+      title: data,
+      container: this.name,
+    });
   }
 }
