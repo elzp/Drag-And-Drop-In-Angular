@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'onearticle',
@@ -10,4 +10,10 @@ export class OneArticle {
   @Input() title = '';
   @Input() content = '';
   @Input() date = '';
+
+  constructor(private el: ElementRef) {
+    //from https://stackoverflow.com/a/69948220
+    const rect = this.el.nativeElement.getBoundingClientRect();
+    console.log(this.name, rect);
+  }
 }
