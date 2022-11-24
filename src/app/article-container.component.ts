@@ -13,6 +13,11 @@ interface eventData {
   container: string;
 }
 
+interface positionObject {
+  title: string;
+  topPosition: number;
+}
+
 @Component({
   selector: 'article-container',
   templateUrl: './article-container.component.html',
@@ -23,6 +28,7 @@ export class ArticleContainer implements OnInit, OnChanges {
   @Input() articlesData;
   thisArticles;
   @Output() changecontainerEvent = new EventEmitter<eventData>();
+  @Output() sendpositionEvent = new EventEmitter<positionObject>();
 
   ngOnInit() {
     this.setCurrentUIData();
@@ -50,5 +56,12 @@ export class ArticleContainer implements OnInit, OnChanges {
     if (changes.articlesData !== changes.articlesData.currentValue) {
       this.setCurrentUIData();
     }
+  }
+
+  changePosition(data){
+    this.sendpositionEvent.emit({
+      title: data.title,
+      topPosition: data.topPosition,
+    });
   }
 }

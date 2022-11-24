@@ -23,6 +23,7 @@
       [title]="article.name"
       [content]="article.content"
       [date]="article.date"
+      (sendPositionEvent)="changePosition($event)"
     ></onearticle>
   </main>
 </div>

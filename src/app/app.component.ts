@@ -51,4 +51,8 @@ export class AppComponent {
     });
     this.articlesData = [...articlesAfterChange];
   }
+
+  changePosition(data) {
+    console.log(data);
+  }
 }

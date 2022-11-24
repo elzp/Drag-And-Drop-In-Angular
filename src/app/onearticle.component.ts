@@ -34,6 +34,5 @@ export class OneArticle implements AfterViewInit {
       title: this.title,
       topPosition: rect.top,
     });
-    console.log(this.title, rect);
   }
 }
