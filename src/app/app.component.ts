@@ -54,5 +54,11 @@ export class AppComponent {
 
   changePosition(data) {
     console.log(data);
+    this.articlesData = this.articlesData.map((it) => {
+      if (data.title === it.name) {
+        it.position = data.topPosition;
+      }
+      return it;
+    });
   }
 }
