@@ -48,9 +48,11 @@ export class ArticleContainer implements OnInit, OnChanges {
   }
 
   setCurrentUIData() {
-    this.thisArticles = this.articlesData.filter(
-      (it) => it.container === this.name
-    );
+    this.thisArticles = this.articlesData
+      .filter((it) => it.container === this.name)
+      .sort((a, b) => {
+        return a.position - b.position;
+      });
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.articlesData !== changes.articlesData.currentValue) {
@@ -58,7 +60,7 @@ export class ArticleContainer implements OnInit, OnChanges {
     }
   }
 
-  changePosition(data){
+  changePosition(data) {
     this.sendpositionEvent.emit({
       title: data.title,
       topPosition: data.topPosition,
