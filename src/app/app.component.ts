@@ -15,34 +15,36 @@ export class AppComponent {
       date: '10.11.2022',
       content: 'art1',
       container: 'Drafts',
-      position: -1,
+      position: 0,
     },
     {
       name: 'art2',
       date: '11.11.2022',
       content: 'art2',
       container: 'Drafts',
-      position: -2,
+      position: 0,
     },
     {
       name: 'art3',
       date: '12.11.2022',
       content: 'art3',
       container: 'Drafts',
-      position: -3,
+      position: 0,
     },
     {
       name: 'art4',
       date: '14.11.2022',
       content: 'art4',
       container: 'Published',
-      position: -1,
+      position: 0,
     },
   ];
   changeContainer(data) {
     const articlesAfterChange = this.articlesData.map((it) => {
       it;
       if (it.name === data.title) {
+        it.position = data.positon;
+        console.log('new position on drop', it.position, data.positon);
         it.container =
           it['container'] === data.container ? it.container : data.container;
       }
