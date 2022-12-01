@@ -11,6 +11,7 @@ import {
 interface eventData {
   title: string;
   container: string;
+  position: number;
 }
 
 interface positionObject {
@@ -44,6 +45,7 @@ export class ArticleContainer implements OnInit, OnChanges {
     this.changecontainerEvent.emit({
       title: data,
       container: this.name,
+      position: 0,
     });
   }
 
