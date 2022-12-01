@@ -45,7 +45,7 @@ export class ArticleContainer implements OnInit, OnChanges {
     this.changecontainerEvent.emit({
       title: data,
       container: this.name,
-      position: 0,
+      position: event.pageY,
     });
   }
 
