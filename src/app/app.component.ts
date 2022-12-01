@@ -15,28 +15,28 @@ export class AppComponent {
       date: '10.11.2022',
       content: 'art1',
       container: 'Drafts',
-      position: -1,
+      position: null,
     },
     {
       name: 'art2',
       date: '11.11.2022',
       content: 'art2',
       container: 'Drafts',
-      position: -2,
+      position: null,
     },
     {
       name: 'art3',
       date: '12.11.2022',
       content: 'art3',
       container: 'Drafts',
-      position: -3,
+      position: null,
     },
     {
       name: 'art4',
       date: '14.11.2022',
       content: 'art4',
       container: 'Published',
-      position: -1,
+      position: null,
     },
   ];
   changeContainer(data) {

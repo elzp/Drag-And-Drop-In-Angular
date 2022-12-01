@@ -29,10 +29,13 @@ export class OneArticle implements AfterViewInit {
 
   ngAfterViewInit() {
     // from https://angular.io/api/core/AfterViewInit#ngAfterViewInit
+
+    // setTimeout(()=>{
     const rect = this.el.nativeElement.getBoundingClientRect();
     this.sendPositionEvent.emit({
       title: this.title,
       topPosition: rect.top,
     });
+    // }, 0)
   }
 }
