@@ -47,10 +47,21 @@ export class ArticleContainer implements OnInit, OnChanges {
       container: this.name,
       position: event.pageY,
     });
+
+    this.thisArticles = this.articlesData.map((it) => {
+      if (it.name === it.data) {
+        it.dropped = true;
+      }
+      return it;
+    });
   }
 
   setCurrentUIData() {
     this.thisArticles = this.articlesData
+      .map((it) => {
+        it.dropped = false;
+        return it;
+      })
       .filter((it) => it.container === this.name)
       .sort((a, b) => {
         return a.position - b.position;

@@ -23,6 +23,7 @@
       [title]="article.name"
       [content]="article.content"
       [date]="article.date"
+      [dropped] = "article.dropped"
       (sendPositionEvent)="changePosition($event)"
     ></onearticle>
   </main>

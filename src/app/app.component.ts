@@ -43,7 +43,9 @@ export class AppComponent {
     const articlesAfterChange = this.articlesData.map((it) => {
       it;
       if (it.name === data.title) {
+        console.log( data.title,'przed', it.position);
         it.position = data.position;
+        console.log(data.title,'po', data.position);
         it.container =
           it['container'] === data.container ? it.container : data.container;
       }
