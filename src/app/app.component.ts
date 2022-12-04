@@ -1,5 +1,5 @@
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
-import { ArticleInt } from './interfaces';
+import { ArticleInt, eventData, positionObject } from './interfaces';
 
 @Component({
   selector: 'my-app',
@@ -39,7 +39,7 @@ export class AppComponent {
       position: null,
     },
   ];
-  changeContainer(data) {
+  changeContainer(data: eventData) {
     const articlesAfterChange = this.articlesData.map((it) => {
       it;
       if (it.name === data.title) {
@@ -53,7 +53,7 @@ export class AppComponent {
     this.articlesData = [...articlesAfterChange];
   }
 
-  changePosition(data) {
+  changePosition(data: positionObject) {
     console.log(data);
     this.articlesData = this.articlesData.map((it) => {
       if (data.title === it.name) {
