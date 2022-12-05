@@ -7,7 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { ArticleInt, eventData, positionObject} from './interfaces';
+import { ArticleInt, eventData, positionObject } from './interfaces';
 
 @Component({
   selector: 'article-container',
@@ -25,10 +25,11 @@ export class ArticleContainer implements OnInit, OnChanges {
     this.setCurrentUIData();
   }
   onDragStart(event: DragEvent) {
-    const eventTarget = event.target as Element;
-    event?.dataTransfer?.setData('text', eventTarget.id);
+    let divTarget = event.target as Element;
+    const id: string = divTarget?.id || '';
+    event?.dataTransfer?.setData('text', id);
   }
-  onDragover(event: DragEvent) {
+  onDragover(event: Event) {
     event.preventDefault();
   }
   onDrop(event: DragEvent) {

@@ -2,9 +2,15 @@ import {
   Component,
   Input,
   ElementRef,
-  AfterViewInit,
+  // AfterViewInit,
   Output,
   EventEmitter,
+  // OnChanges,
+  // SimpleChanges,
+  AfterViewChecked,
+  // AfterContentInit,
+  // DoCheck,
+  // AfterContentChecked,
 } from '@angular/core';
 
 interface positionObject {
@@ -16,26 +22,47 @@ interface positionObject {
   templateUrl: './onearticle.component.html',
   styles: [`h1 { font-family: Lato; }`],
 })
-export class OneArticle implements AfterViewInit {
-  @Input() name: string ='';
+// AfterViewInit,
+// AfterContentInit,
+// DoCheck,
+// AfterContentChecked,
+export class OneArticle implements AfterViewChecked {
+  @Input() name: string = '';
   @Input() title = '';
   @Input() content = '';
   @Input() date = '';
+  checkedOnce = { name: '', checkedOnce: false };
   @Output() sendPositionEvent = new EventEmitter<positionObject>();
 
   constructor(private el: ElementRef) {
     //from https://stackoverflow.com/a/69948220
   }
 
-  ngAfterViewInit() {
-    // from https://angular.io/api/core/AfterViewInit#ngAfterViewInit
+  ngAfterViewChecked() {
+    if (!this.checkedOnce.checkedOnce && this.checkedOnce.name === '') {
+      this.checkedOnce = { name: this.name, checkedOnce: true };
+      console.log('ngAfterViewChecked');
+      console.log(this.checkedOnce, 'title', this.title, 'topPosition', null);
+    } 
+    if (this.checkedOnce.checkedOnce) {
+      console.log('this.checkedOnce.checkedOnce', this.checkedOnce.checkedOnce);
+      this.checkedOnce.checkedOnce = false;
 
-    // setTimeout(()=>{
-    const rect = this.el.nativeElement.getBoundingClientRect();
-    this.sendPositionEvent.emit({
-      title: this.title,
-      topPosition: rect.top,
-    });
-    // }, 0)
+      setTimeout(() => {
+        const rect = this.el.nativeElement.getBoundingClientRect();
+        console.log('ngAfterViewChecked sending');
+        console.log(
+          this.checkedOnce,
+          'title',
+          this.title,
+          'topPosition',
+          rect.top
+        );
+        this.sendPositionEvent.emit({
+          title: this.title,
+          topPosition: rect.top,
+        });
+      }, 1000);
+    }
   }
 }
