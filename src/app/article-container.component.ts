@@ -7,17 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-
-interface eventData {
-  title: string;
-  container: string;
-  position: number;
-}
-
-interface positionObject {
-  title: string;
-  topPosition: number;
-}
+import { ArticleInt, eventData, positionObject} from './interfaces';
 
 @Component({
   selector: 'article-container',
@@ -25,23 +15,24 @@ interface positionObject {
   styles: [`h1 { font-family: Lato; }`],
 })
 export class ArticleContainer implements OnInit, OnChanges {
-  @Input() name: string;
-  @Input() articlesData;
-  thisArticles;
+  @Input() name: string = '';
+  @Input() articlesData: Array<ArticleInt> = [];
+  thisArticles: Array<ArticleInt> = [];
   @Output() changecontainerEvent = new EventEmitter<eventData>();
   @Output() sendpositionEvent = new EventEmitter<positionObject>();
 
   ngOnInit() {
     this.setCurrentUIData();
   }
-  onDragStart(event) {
-    event.dataTransfer.setData('text', event.target.id);
+  onDragStart(event: DragEvent) {
+    const eventTarget = event.target as Element;
+    event?.dataTransfer?.setData('text', eventTarget.id);
   }
-  onDragover(event) {
+  onDragover(event: DragEvent) {
     event.preventDefault();
   }
-  onDrop(event) {
-    var data = event.dataTransfer.getData('text');
+  onDrop(event: DragEvent) {
+    var data = event?.dataTransfer?.getData('text')|| '' ;
     this.changecontainerEvent.emit({
       title: data,
       container: this.name,
@@ -53,16 +44,16 @@ export class ArticleContainer implements OnInit, OnChanges {
     this.thisArticles = this.articlesData
       .filter((it) => it.container === this.name)
       .sort((a, b) => {
-        return a.position - b.position;
+        return (a.position || 0) - (b.position || 0);
       });
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.articlesData !== changes.articlesData.currentValue) {
+    if (changes['articlesData'] !== changes['articlesData'].currentValue) {
       this.setCurrentUIData();
     }
   }
 
-  changePosition(data) {
+  changePosition(data: positionObject) {
     this.sendpositionEvent.emit({
       title: data.title,
       topPosition: data.topPosition,

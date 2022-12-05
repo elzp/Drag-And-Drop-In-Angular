@@ -17,7 +17,7 @@ interface positionObject {
   styles: [`h1 { font-family: Lato; }`],
 })
 export class OneArticle implements AfterViewInit {
-  @Input() name: string;
+  @Input() name: string ='';
   @Input() title = '';
   @Input() content = '';
   @Input() date = '';
