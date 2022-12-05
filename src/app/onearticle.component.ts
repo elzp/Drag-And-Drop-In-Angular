@@ -26,8 +26,7 @@ interface positionObject {
 // AfterContentInit,
 // DoCheck,
 // AfterContentChecked,
-//implements AfterViewChecked
-export class OneArticle {
+export class OneArticle implements AfterViewChecked {
   @Input() name: string = '';
   @Input() title = '';
   @Input() content = '';
@@ -40,30 +39,44 @@ export class OneArticle {
   }
 
   ngAfterViewChecked() {
-    // if (!this.checkedOnce.checkedOnce && this.checkedOnce.name === '') {
-    //   this.checkedOnce = { name: this.name, checkedOnce: true };
-    //   console.log('ngAfterViewChecked');
-    //   console.log(this.checkedOnce, 'title', this.title, 'topPosition', null);
-    // } 
-    // if (this.checkedOnce.checkedOnce) {
-    //   console.log('this.checkedOnce.checkedOnce', this.checkedOnce.checkedOnce);
-    //   this.checkedOnce.checkedOnce = false;
-
-    //   setTimeout(() => {
-    //     const rect = this.el.nativeElement.getBoundingClientRect();
-    //     console.log('ngAfterViewChecked sending');
-    //     console.log(
-    //       this.checkedOnce,
-    //       'title',
-    //       this.title,
-    //       'topPosition',
-    //       rect.top
-    //     );
-    //     this.sendPositionEvent.emit({
-    //       title: this.title,
-    //       topPosition: rect.top,
-    //     });
-    //   }, 1000);
-    // }
+    if (!this.checkedOnce.checkedOnce) {
+      this.checkedOnce = { name: this.name, checkedOnce: true };
+      // console.log('ngAfterViewChecked');
+      // console.log(this.checkedOnce, 'title', this.title, 'topPosition', null);
+    }
+    if (!this.checkedOnce.checkedOnce && this.checkedOnce.name !== '') {
+      // console.log('ngAfterViewChecked do nothing');
+      // console.log(this.checkedOnce, 'title', this.title, 'topPosition', null);
+    }
+    if (this.checkedOnce.checkedOnce) {
+      // console.log('this.checkedOnce.checkedOnce', this.checkedOnce.checkedOnce);
+      this.checkedOnce.checkedOnce = false;
+      const rect = this.el.nativeElement.getBoundingClientRect();
+      // console.log(
+      //   this.checkedOnce,
+      //   'title',
+      //   this.title,
+      //   'topPosition',
+      //   rect.top
+      // );
+      this.sendPositionEvent.emit({
+        title: this.title,
+        topPosition: rect.top,
+      });
+      //   setTimeout(() => {
+      //     console.log('ngAfterViewChecked sending');
+      //     console.log(
+      //       this.checkedOnce,
+      //       'title',
+      //       this.title,
+      //       'topPosition',
+      //       rect.top
+      //     );
+      //     this.sendPositionEvent.emit({
+      //       title: this.title,
+      //       topPosition: rect.top,
+      //     });
+      //   }, 1000);
+    }
   }
 }

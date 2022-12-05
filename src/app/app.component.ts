@@ -54,7 +54,7 @@ export class AppComponent {
   }
 
   changePosition(data: positionObject) {
-    console.log(data);
+    // console.log(data);
     this.articlesData = this.articlesData.map((it) => {
       if (data.title === it.name) {
         it.position = data.topPosition;
